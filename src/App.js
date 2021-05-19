@@ -1,17 +1,15 @@
-import logo from "./logo.svg";
-import "./App.scss";
-import SelectModel from "./components/selectModel";
+import {BrowserRouter, Switch, Route} from "react-router-dom";
+import SelectModel from "./components/SelectModel";
+import Home from "./components/Home";
 
 function App() {
     return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo"/>
-                <button>Importuj konfigurację</button>
-                <button>Utwórz nową konfigurację</button>
-                <SelectModel />
-            </header>
-        </div>
+        <BrowserRouter>
+            <Switch>
+                <Route exact path="/" exact component={Home} />
+                <Route exact path="/config" exact component={SelectModel} />
+            </Switch>
+        </BrowserRouter>
     );
 }
 
