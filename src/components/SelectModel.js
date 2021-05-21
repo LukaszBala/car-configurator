@@ -2,7 +2,7 @@ import logo from "../logo.svg";
 
 const SelectModel = () => {
     return (
-        <div className="App">
+        <div>
             <img src={logo} className="App-logo" alt="logo"/>
             <img src={logo} className="App-logo" alt="logo"/>
             <img src={logo} className="App-logo" alt="logo"/>
