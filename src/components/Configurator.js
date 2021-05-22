@@ -1,11 +1,11 @@
-import SelectModel from "./SelectModel";
+import Picture from "./Picture";
 import CheckBoxGroup from "./CheckBoxGroup"
 
 const Configurator = () => {
     return (
         <div className="App">
-            <SelectModel />
-            <CheckBoxGroup />
+            <Picture />
+            <CheckBoxGroup name={"silnik"} values={["diesel","benzyna","jebane V8"]}/>
         </div>
     )
 }
