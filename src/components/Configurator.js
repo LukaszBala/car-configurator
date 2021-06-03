@@ -1,15 +1,18 @@
 import Picture from "./Picture";
-import CheckBoxGroup from "./CheckBoxGroup"
+import CheckBoxGroup from "./CheckBox/CheckBoxGroup"
+import React, {useState} from "react";
+import Option from './Option/Option'
 
 const Configurator = () => {
+    const [count, setCount] = useState(0);
     return (
         <div className="App">
-            <Picture />
-            <CheckBoxGroup name={"model"} values={["3","5","7"]}/>
-            <CheckBoxGroup name={"nadwozie"} values={["sedan","tfu kombi","kupe kabrio"]}/>
-            <CheckBoxGroup name={"silnik"} values={["diesel","benzyna","jebane V8"]}/>
-            <CheckBoxGroup name={"wyposażenie"} values={["bieda","ujdzie","lukus","somsiad placze jak widzi"]}/>
-            <CheckBoxGroup name={"felgi"} values={["18","19","32 z ursusa"]}/>
+            <Picture/>
+            <Option name={'model'} values={["1", "2", "3"]}/>
+            <Option name={"nadwozie"} values={["sedan","tfu kombi","kupe kabrio"]}/>
+            <Option name={"silnik"} values={["diesel","benzyna","jebane V8"]}/>
+            <Option name={"wyposażenie"} values={["bieda","ujdzie","lukus","somsiad placze jak widzi"]}/>
+            <Option name={"felgi"} values={["18","19","32 z ursusa"]}/>
         </div>
     )
 }

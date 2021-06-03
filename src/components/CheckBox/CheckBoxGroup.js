@@ -1,5 +1,6 @@
 import React from "react";
 import CheckBox from "./CheckBox";
+import "./ChceckBox.scss"
 
 class CheckBoxGroup extends React.Component {
     constructor(props) {
@@ -29,8 +30,7 @@ class CheckBoxGroup extends React.Component {
 
     render() {
         return (
-            <div>
-                <h1> {this.props.name} </h1>
+            <div className="check-box-group">
                 <ul>
                     {
                         this.state.tab.map((elem, index) => {
