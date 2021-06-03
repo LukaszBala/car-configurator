@@ -1,13 +1,24 @@
-import Picture from "./Picture";
 import CheckBoxGroup from "./CheckBox/CheckBoxGroup"
 import React, {useState} from "react";
 import Option from './Option/Option'
 
 const Configurator = () => {
-    const [count, setCount] = useState(0);
+    const [car, setCar] = useState(
+        {
+            model: '',
+            body: {
+                type: '',
+                color: ''
+            },
+            engine: '',
+            equipment: '',
+            wheels: {
+                tyres: '',
+                rims: ''
+            }
+        })
     return (
         <div className="App">
-            <Picture/>
             <Option name={'model'} values={["1", "2", "3"]}/>
             <Option name={"nadwozie"} values={["sedan","tfu kombi","kupe kabrio"]}/>
             <Option name={"silnik"} values={["diesel","benzyna","jebane V8"]}/>
