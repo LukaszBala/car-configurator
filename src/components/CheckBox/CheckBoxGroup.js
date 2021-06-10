@@ -12,19 +12,26 @@ class CheckBoxGroup extends React.Component {
         }
         tab[0].isChecked=true;
         this.state = {
-            tab:tab
+            tab:tab,
+            value:tab[0]
         }
     }
 
     handleCheckChieldElement = (event) => {
-        let tab = this.state.tab
+        let tab = this.state.tab;
+        let temp;
+        console.log("dupa");
         tab.forEach(elem => {
-            if (elem.value === event.target.value)
-                elem.isChecked =  true
-            else
-                elem.isChecked=false
+            if (elem.value === event.target.value) {
+                console.log("dupa");
+                elem.isChecked = true;
+                temp=elem.value;
+                this.props.wgore(temp);
+                console.log("checkboc"+temp);
+            }else
+                elem.isChecked=false;
         })
-        this.setState({tab: tab})
+        this.setState({tab: tab, value:temp});
     }
 
 
