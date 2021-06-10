@@ -29,8 +29,8 @@ const Configurator = () => {
 
     function wgore(temp) {
         setValue(temp);
-        console.log("konfig" + temp);
-        console.log(value)
+        //console.log("konfig" + temp);
+        //console.log(value)
     }
 
     return (
