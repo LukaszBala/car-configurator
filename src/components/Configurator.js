@@ -8,16 +8,16 @@ const Configurator = () => {
 
     const [car, setCar] = useState(
         {
-            model: '',
+            model: '3',
             body: {
-                type: '',
-                color: ''
+                type: 'sedan',
+                color: 'czerwony'
             },
-            engine: '',
-            equipment: '',
+            engine: 'benzyna',
+            equipment: 'bieda',
             wheels: {
                 tyres: '',
-                rims: ''
+                rims: '18'
             }
         })
 
