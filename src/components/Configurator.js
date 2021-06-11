@@ -5,6 +5,7 @@ import firebase from "firebase";
 const Configurator = () => {
 
     const [dupa, setDupa] = useState('dupa')
+    const [postId, setPostId] = useState(null);
 
     const [car, setCar] = useState(
         {
@@ -26,6 +27,25 @@ const Configurator = () => {
         starCountRef.once('value', (snapshot) => {
         }).then(r => setCar(r.val()));
     })*/
+
+    function getDB() {
+        // Simple GET request using fetch
+        fetch("https://car-configurator-6b257-default-rtdb.europe-west1.firebasedatabase.app/cars/1.json")
+            .then(response => response.json())
+            .then(data => setCar(data));
+    }
+
+    function postDB(){
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ car })
+        };
+        fetch('https://car-configurator-6b257-default-rtdb.europe-west1.firebasedatabase.app/cars.json', requestOptions)
+            .then(response => response.json())
+            .then(data => setPostId(data.id));
+
+    }
 
     function setCheckedValueInCarObject(name, value) {
         setDupa(value);
@@ -50,6 +70,8 @@ const Configurator = () => {
 
     return (
         <div className="App">
+            <button type={"button"} onClick={getDB}>pobierz</button>
+            <button type={"button"} onClick={postDB}>wyslij</button>
             <Option name={'model'} values={["1", "2", "3"]} setCheckedValueInCarObject={setCheckedValueInCarObject}/>
             <code>
                 <pre>{JSON.stringify(car, null, 2)}</pre>
