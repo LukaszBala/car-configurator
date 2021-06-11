@@ -4,7 +4,7 @@ import firebase from "firebase";
 
 const Configurator = () => {
 
-    const [value, setValue] = useState('dupa')
+    const [dupa, setDupa] = useState('dupa')
 
     const [car, setCar] = useState(
         {
@@ -21,34 +21,45 @@ const Configurator = () => {
             }
         })
 
-    useEffect(() => {
+    /*useEffect(() => {
         const starCountRef = firebase.database().ref('cars/1');
         starCountRef.once('value', (snapshot) => {
         }).then(r => setCar(r.val()));
-    })
+    })*/
 
-    function wgore(temp) {
-        setValue(temp);
-        //console.log("konfig" + temp);
+    function wgore(name, value) {
+        setDupa(value);
+        //console.log("konfig " + name +" "+ value);
+        let temp=car;
+        if(name==="silnik") {
+            temp.engine=value;
+        }else if(name==="model"){
+            temp.model=value;
+        }else if(name==="nadwozie"){
+            temp.body.type=value;
+        }else if(name==="kolor"){
+            temp.body.color=value;
+        }else if(name==="wyposażenie"){
+            temp.equipment=value;
+        }else if(name==="felgi"){
+            temp.wheels.rims=value;
+        }
+        setCar(temp);
         //console.log(value)
     }
 
     return (
         <div className="App">
             <Option name={'model'} values={["1", "2", "3"]} wgore={wgore}/>
-            <h1>{value}</h1>
             <code>
                 <pre>{JSON.stringify(car, null, 2)}</pre>
             </code>
             <Option name={"nadwozie"} values={["sedan", "tfu kombi", "kupe kabrio"]} wgore={wgore}/>
-            <h1>{value}</h1>
             <Option name={"silnik"} values={["diesel", "benzyna", "jebane V8"]} wgore={wgore}/>
-            <h1>{value}</h1>
             <Option name={"wyposażenie"} values={["bieda", "ujdzie", "lukus", "somsiad placze jak widzi"]}
                     wgore={wgore}/>
-            <h1>{value}</h1>
             <Option name={"felgi"} values={["18", "19", "32 z ursusa"]} wgore={wgore}/>
-            <h1>{value}</h1>
+            <Option name={"kolor"} values={["czerwony", "szary", "inny szary","biały"]} wgore={wgore}/>
         </div>
     )
 }

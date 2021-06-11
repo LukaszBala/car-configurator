@@ -19,7 +19,7 @@ const CheckBoxGroup = ({name, values, wgore}) =>  {
             if (elem.value === event.target.value) {
                 //console.log("dupa");
                 elem.isChecked = true;
-                wgore(elem.value);
+                wgore(name, elem.value);
                 //console.log("checkboc"+temp);
             }else
                 elem.isChecked=false;
