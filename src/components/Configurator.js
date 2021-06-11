@@ -39,7 +39,7 @@ const Configurator = () => {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ car })
+            body: JSON.stringify({ ...car })
         };
         fetch('https://car-configurator-6b257-default-rtdb.europe-west1.firebasedatabase.app/cars.json', requestOptions)
             .then(response => response.json())
