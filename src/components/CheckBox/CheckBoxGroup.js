@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import CheckBox from "./CheckBox";
 import "./ChceckBox.scss"
 
-const CheckBoxGroup = ({name, values, wgore}) =>  {
+const CheckBoxGroup = ({name, values, setCheckedValueInCarObject}) =>  {
 
     let tempTab=[];
     for(let i=0; i < values.length;i++ ){
@@ -19,7 +19,7 @@ const CheckBoxGroup = ({name, values, wgore}) =>  {
             if (elem.value === event.target.value) {
                 //console.log("dupa");
                 elem.isChecked = true;
-                wgore(name, elem.value);
+                setCheckedValueInCarObject(name, elem.value);
                 //console.log("checkboc"+temp);
             }else
                 elem.isChecked=false;

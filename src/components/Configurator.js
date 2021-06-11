@@ -27,7 +27,7 @@ const Configurator = () => {
         }).then(r => setCar(r.val()));
     })*/
 
-    function wgore(name, value) {
+    function setCheckedValueInCarObject(name, value) {
         setDupa(value);
         //console.log("konfig " + name +" "+ value);
         let temp=car;
@@ -50,16 +50,16 @@ const Configurator = () => {
 
     return (
         <div className="App">
-            <Option name={'model'} values={["1", "2", "3"]} wgore={wgore}/>
+            <Option name={'model'} values={["1", "2", "3"]} setCheckedValueInCarObject={setCheckedValueInCarObject}/>
             <code>
                 <pre>{JSON.stringify(car, null, 2)}</pre>
             </code>
-            <Option name={"nadwozie"} values={["sedan", "tfu kombi", "kupe kabrio"]} wgore={wgore}/>
-            <Option name={"silnik"} values={["diesel", "benzyna", "jebane V8"]} wgore={wgore}/>
+            <Option name={"nadwozie"} values={["sedan", "tfu kombi", "kupe kabrio"]} setCheckedValueInCarObject={setCheckedValueInCarObject}/>
+            <Option name={"silnik"} values={["diesel", "benzyna", "jebane V8"]} setCheckedValueInCarObject={setCheckedValueInCarObject}/>
             <Option name={"wyposażenie"} values={["bieda", "ujdzie", "lukus", "somsiad placze jak widzi"]}
-                    wgore={wgore}/>
-            <Option name={"felgi"} values={["18", "19", "32 z ursusa"]} wgore={wgore}/>
-            <Option name={"kolor"} values={["czerwony", "szary", "inny szary","biały"]} wgore={wgore}/>
+                    setCheckedValueInCarObject={setCheckedValueInCarObject}/>
+            <Option name={"felgi"} values={["18", "19", "32 z ursusa"]} setCheckedValueInCarObject={setCheckedValueInCarObject}/>
+            <Option name={"kolor"} values={["czerwony", "szary", "inny szary","biały"]} setCheckedValueInCarObject={setCheckedValueInCarObject}/>
         </div>
     )
 }
