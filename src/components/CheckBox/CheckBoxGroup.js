@@ -14,13 +14,10 @@ const CheckBoxGroup = ({name, values, setCarValue}) =>  {
 
     function handleCheckChildElement (event) {
         let tempTab = tab;
-        //console.log("dupa");
         tempTab.forEach(elem => {
             if (elem.value === event.target.value) {
-                //console.log("dupa");
                 elem.isChecked = true;
                 setCarValue(name, elem.value);
-                //console.log("checkboc"+temp);
             }else
                 elem.isChecked=false;
         })

@@ -24,7 +24,7 @@ const Comparator = () => {
     }, []);
 
     return (
-        <div className="App">
+        <div className="Main">
             <code>
                 <pre>{JSON.stringify(cars, null, 2)}</pre>
             </code>

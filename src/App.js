@@ -7,7 +7,7 @@ import Comparator from "./components/Comparator/Comparator";
 
 function App() {
     return (
-        <div>
+        <div className='App'>
             <NavBar/>
             <BrowserRouter>
                 <Switch>

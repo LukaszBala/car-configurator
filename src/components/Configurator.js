@@ -1,23 +1,28 @@
 import React, {useEffect, useState} from "react";
-import Option from './Option/Option'
+import Option from './Option/Option';
+import CircularProgress from "@material-ui/core/CircularProgress";
+import _ from 'lodash';
+import {getAllCars, getConfig} from "../services/Api";
+import ModelOption from "./ModelOption/ModelOption";
 
 const Configurator = () => {
-
-    const [dupa, setDupa] = useState('dupa')
     const [postId, setPostId] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [config, setConfig] = useState(null);
 
     const [car, setCar] = useState(
         {
-            model: '3',
+            id: '',
+            model: '',
             body: {
-                type: 'sedan',
-                color: 'czerwony'
+                type: '',
+                color: ''
             },
-            engine: 'benzyna',
-            equipment: 'bieda',
+            engine: '',
+            equipment: '',
             wheels: {
                 tyres: '',
-                rims: '18'
+                rims: ''
             }
         })
 
@@ -41,10 +46,14 @@ const Configurator = () => {
     }
 
     function setCarValue(field, value) {
-        setDupa(value);
+        const result = setFieldInObject(field, value, car);
+        setCar({...result});
+    }
+
+    function setFieldInObject(field, value, object) {
         let result, fields, current, temp;
         fields = field.split('.');
-        result = {...car}
+        result = _.cloneDeep(object);
         temp = result;
         while(fields.length > 0)
         {
@@ -56,23 +65,85 @@ const Configurator = () => {
             }
             temp = temp[current];
         }
-        setCar({...result});
+        return result;
     }
 
+    function updateConfig() {
+        fetch("https://car-configurator-6b257-default-rtdb.europe-west1.firebasedatabase.app/config/corolla.json")
+            .then(res => res.json())
+            .then(res => {
+                const requestOptions = {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ ...res })
+                };
+                fetch('https://car-configurator-6b257-default-rtdb.europe-west1.firebasedatabase.app/config/gt86.json', requestOptions)
+                fetch('https://car-configurator-6b257-default-rtdb.europe-west1.firebasedatabase.app/config/sienna.json', requestOptions)
+                fetch('https://car-configurator-6b257-default-rtdb.europe-west1.firebasedatabase.app/config/yaris.json', requestOptions)
+            })
+    }
+
+    function loadCar() {
+        setLoading(true);
+        getAllCars()
+            .then(response => response.json())
+            .then(res => {
+                const data = res[Object.keys(res)[0]];
+                data.id = Object.keys(res)[0];
+                setCar({...data});
+                setLoading(false);
+            }).catch(() => {
+            setLoading(false);
+        })
+    }
+
+    function loadConfig() {
+        setLoading(true);
+        getConfig()
+            .then(response => response.json())
+            .then(res => {
+                setConfig({...res});
+                setLoading(false);
+            })
+            .catch((err) => {
+            setLoading(false);
+        })
+    }
+
+    function mapOptions() {
+        const fields = Object.keys(config[car.model]);
+        fields.map(item => {
+            let temp = config;
+            let keys = item;
+            let curKey = item;
+            let res;
+            while (!temp[curKey][0]) {
+                Object.keys(temp[curKey]).map()
+
+            }
+            return res;
+            // return <Option name={item} field={item} values={config[item]} setCarValue={setCarValue}/>
+        })
+    }
+
+    useEffect(() => {
+        loadConfig();
+    }, [])
+
     return (
-        <div className="App">
-            <button type={"button"} onClick={getDB}>pobierz</button>
-            <button type={"button"} onClick={postDB}>wyslij</button>
-            <Option name={'model'} values={["1", "2", "3"]} field={'model'} setCarValue={setCarValue}/>
-            <code>
-                <pre>{JSON.stringify(car, null, 2)}</pre>
-            </code>
-            <Option name={"type"} field={"body.type"} values={["sedan", "tfu kombi", "kupe kabrio"]} setCarValue={setCarValue}/>
-            <Option name={"engine"} field={"engine"} values={["diesel", "benzyna", "jebane V8"]} setCarValue={setCarValue}/>
-            <Option name={"equipment"} field={"equipment"} values={["bieda", "ujdzie", "lukus", "somsiad placze jak widzi"]}
-                    setCarValue={setCarValue}/>
-            <Option name={"rims"} field={"wheels.rims"} values={["18", "19", "32 z ursusa"]} setCarValue={setCarValue}/>
-            <Option name={"color"} field={"body.color"} values={["czerwony", "szary", "inny szary","biały"]} setCarValue={setCarValue}/>
+        <div className="Main">
+            {loading || !config ? <CircularProgress className='centered-loader' /> : <>
+                <ModelOption options={Object.keys(config)} field={'model'} setCarValue={setCarValue}/>
+                {car.model ? <>
+                    {/*{mapOptions()}*/}
+                    <Option name={"type"} field={"body.type"} values={["sedan", "tfu kombi", "kupe kabrio"]} setCarValue={setCarValue}/>
+                    <Option name={"engine"} field={"engine"} values={["diesel", "benzyna", "jebane V8"]} setCarValue={setCarValue}/>
+                    <Option name={"equipment"} field={"equipment"} values={["bieda", "ujdzie", "lukus", "somsiad placze jak widzi"]}
+                            setCarValue={setCarValue}/>
+                    <Option name={"rims"} field={"wheels.rims"} values={["18", "19", "32 z ursusa"]} setCarValue={setCarValue}/>
+                    <Option name={"color"} field={"body.color"} values={["czerwony", "szary", "inny szary","biały"]} setCarValue={setCarValue}/>
+                    </> : null}
+            </>}
         </div>
     )
 }

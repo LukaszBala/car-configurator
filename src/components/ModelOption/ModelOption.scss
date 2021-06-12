@@ -1,0 +1,30 @@
+.ModelOption {
+  width: 80%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.model-img {
+  width: auto;
+  height: 200px;
+  object-fit: contain;
+}
+
+.model-content {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  height: auto;
+
+  & > * {
+    width: initial;
+  }
+}
+
+.car {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+}
