@@ -1,7 +1,8 @@
 import {useEffect, useState} from "react";
 
 const Comparator = () => {
-    const [cars, setCars] = useState(null);
+    const [cars, setCars] = useState([]);
+    const [tab, setTab]=useState([]);
 
     useEffect(() => {
         // GET request using fetch inside useEffect React hook
@@ -9,6 +10,10 @@ const Comparator = () => {
             .then(response => response.json())
             .then(data => setCars(data));
         console.log('get all');
+        let t=["dupa","jhiuhiu"];
+        //cars.forEach(elem=>t.push(JSON.stringify(elem, null, 2)));
+        //t.push(cars.1.toString());
+        setTab(t);
 
         // empty dependency array means this effect will only run once (like componentDidMount in classes)
     }, []);
@@ -18,6 +23,9 @@ const Comparator = () => {
             <code>
                 <pre>{JSON.stringify(cars, null, 2)}</pre>
             </code>
+            <table>
+                <tr><th></th><th>{tab.toString()}</th> </tr>
+            </table>
         </div>
     )
 }
