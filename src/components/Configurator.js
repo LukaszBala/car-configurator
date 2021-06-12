@@ -56,7 +56,7 @@ const Configurator = () => {
             }
             temp = temp[current];
         }
-        setCar({...car});
+        setCar({...result});
     }
 
     return (
