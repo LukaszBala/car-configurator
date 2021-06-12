@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import Option from './Option/Option'
-import firebase from "firebase";
 
 const Configurator = () => {
 
@@ -21,12 +20,6 @@ const Configurator = () => {
                 rims: '18'
             }
         })
-
-    /*useEffect(() => {
-        const starCountRef = firebase.database().ref('cars/1');
-        starCountRef.once('value', (snapshot) => {
-        }).then(r => setCar(r.val()));
-    })*/
 
     function getDB() {
         // Simple GET request using fetch
@@ -49,7 +42,21 @@ const Configurator = () => {
 
     function setCarValue(field, value) {
         setDupa(value);
-        setCar({...car, [field]: value});
+        let result, fields, current, temp;
+        fields = field.split('.');
+        result = {...car}
+        temp = result;
+        while(fields.length > 0)
+        {
+            current = fields.shift();
+            if(fields.length <= 0) {
+                temp[current] = value;
+            } else {
+                if(!(current in temp)) temp[current] = {};
+            }
+            temp = temp[current];
+        }
+        setCar({...car});
     }
 
     return (
