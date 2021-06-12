@@ -47,41 +47,25 @@ const Configurator = () => {
 
     }
 
-    function setCheckedValueInCarObject(name, value) {
+    function setCarValue(field, value) {
         setDupa(value);
-        //console.log("konfig " + name +" "+ value);
-        let temp=car;
-        if(name==="silnik") {
-            temp.engine=value;
-        }else if(name==="model"){
-            temp.model=value;
-        }else if(name==="nadwozie"){
-            temp.body.type=value;
-        }else if(name==="kolor"){
-            temp.body.color=value;
-        }else if(name==="wyposażenie"){
-            temp.equipment=value;
-        }else if(name==="felgi"){
-            temp.wheels.rims=value;
-        }
-        setCar(temp);
-        //console.log(value)
+        setCar({...car, [field]: value});
     }
 
     return (
         <div className="App">
             <button type={"button"} onClick={getDB}>pobierz</button>
             <button type={"button"} onClick={postDB}>wyslij</button>
-            <Option name={'model'} values={["1", "2", "3"]} setCheckedValueInCarObject={setCheckedValueInCarObject}/>
+            <Option name={'model'} values={["1", "2", "3"]} field={'model'} setCarValue={setCarValue}/>
             <code>
                 <pre>{JSON.stringify(car, null, 2)}</pre>
             </code>
-            <Option name={"nadwozie"} values={["sedan", "tfu kombi", "kupe kabrio"]} setCheckedValueInCarObject={setCheckedValueInCarObject}/>
-            <Option name={"silnik"} values={["diesel", "benzyna", "jebane V8"]} setCheckedValueInCarObject={setCheckedValueInCarObject}/>
-            <Option name={"wyposażenie"} values={["bieda", "ujdzie", "lukus", "somsiad placze jak widzi"]}
-                    setCheckedValueInCarObject={setCheckedValueInCarObject}/>
-            <Option name={"felgi"} values={["18", "19", "32 z ursusa"]} setCheckedValueInCarObject={setCheckedValueInCarObject}/>
-            <Option name={"kolor"} values={["czerwony", "szary", "inny szary","biały"]} setCheckedValueInCarObject={setCheckedValueInCarObject}/>
+            <Option name={"type"} field={"body.type"} values={["sedan", "tfu kombi", "kupe kabrio"]} setCarValue={setCarValue}/>
+            <Option name={"engine"} field={"engine"} values={["diesel", "benzyna", "jebane V8"]} setCarValue={setCarValue}/>
+            <Option name={"equipment"} field={"equipment"} values={["bieda", "ujdzie", "lukus", "somsiad placze jak widzi"]}
+                    setCarValue={setCarValue}/>
+            <Option name={"rims"} field={"wheels.rims"} values={["18", "19", "32 z ursusa"]} setCarValue={setCarValue}/>
+            <Option name={"color"} field={"body.color"} values={["czerwony", "szary", "inny szary","biały"]} setCarValue={setCarValue}/>
         </div>
     )
 }

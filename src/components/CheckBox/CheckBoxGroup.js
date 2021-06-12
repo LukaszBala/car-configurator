@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import CheckBox from "./CheckBox";
 import "./ChceckBox.scss"
 
-const CheckBoxGroup = ({name, values, setCheckedValueInCarObject}) =>  {
+const CheckBoxGroup = ({name, values, setCarValue}) =>  {
 
     let tempTab=[];
     for(let i=0; i < values.length;i++ ){
@@ -12,14 +12,14 @@ const CheckBoxGroup = ({name, values, setCheckedValueInCarObject}) =>  {
 
     const[tab, setTab]=useState(tempTab)
 
-    function handleCheckChieldElement (event) {
+    function handleCheckChildElement (event) {
         let tempTab = tab;
         //console.log("dupa");
         tempTab.forEach(elem => {
             if (elem.value === event.target.value) {
                 //console.log("dupa");
                 elem.isChecked = true;
-                setCheckedValueInCarObject(name, elem.value);
+                setCarValue(name, elem.value);
                 //console.log("checkboc"+temp);
             }else
                 elem.isChecked=false;
@@ -32,7 +32,7 @@ const CheckBoxGroup = ({name, values, setCheckedValueInCarObject}) =>  {
             <ul>
                 {
                     tab.map((elem, index) => {
-                        return (<CheckBox key={index} handleCheckChieldElement={handleCheckChieldElement}  {...elem} />)
+                        return (<CheckBox key={index} handleCheckChildElement={handleCheckChildElement}  {...elem} />)
                     })
                 }
             </ul>

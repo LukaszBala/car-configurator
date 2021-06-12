@@ -1,7 +1,7 @@
 const CheckBox = props => {
     return (
         <li>
-            <input key={props.id} onChange={props.handleCheckChieldElement} type="checkbox" checked={props.isChecked}
+            <input key={props.id} onChange={props.handleCheckChildElement} type="checkbox" checked={props.isChecked}
                    value={props.value}/> {props.value}
         </li>
     )
