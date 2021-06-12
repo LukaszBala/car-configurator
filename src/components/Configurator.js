@@ -112,17 +112,17 @@ const Configurator = () => {
 
     function mapOptions() {
         const fields = Object.keys(config[car.model]);
-        fields.map(item => {
-            let temp = config;
-            let keys = item;
-            let curKey = item;
-            let res;
-            while (!temp[curKey][0]) {
-                Object.keys(temp[curKey]).map()
-
-            }
-            return res;
-            // return <Option name={item} field={item} values={config[item]} setCarValue={setCarValue}/>
+        return fields.map(item => {
+            // let temp = config;
+            // let keys = item;
+            // let curKey = item;
+            // let res;
+            // while (!temp[curKey][0]) {
+            //     Object.keys(temp[curKey]).map()
+            //
+            // }
+            // return res;
+            return <Option name={"type"} field={"body.type"} values={["sedan", "tfu kombi", "kupe kabrio"]} setCarValue={setCarValue} key={item}/>
         })
     }
 
@@ -135,13 +135,13 @@ const Configurator = () => {
             {loading || !config ? <CircularProgress className='centered-loader' /> : <>
                 <ModelOption options={Object.keys(config)} field={'model'} setCarValue={setCarValue}/>
                 {car.model ? <>
-                    {/*{mapOptions()}*/}
-                    <Option name={"type"} field={"body.type"} values={["sedan", "tfu kombi", "kupe kabrio"]} setCarValue={setCarValue}/>
-                    <Option name={"engine"} field={"engine"} values={["diesel", "benzyna", "jebane V8"]} setCarValue={setCarValue}/>
-                    <Option name={"equipment"} field={"equipment"} values={["bieda", "ujdzie", "lukus", "somsiad placze jak widzi"]}
-                            setCarValue={setCarValue}/>
-                    <Option name={"rims"} field={"wheels.rims"} values={["18", "19", "32 z ursusa"]} setCarValue={setCarValue}/>
-                    <Option name={"color"} field={"body.color"} values={["czerwony", "szary", "inny szary","biały"]} setCarValue={setCarValue}/>
+                    {mapOptions()}
+                    {/*<Option name={"type"} field={"body.type"} values={["sedan", "tfu kombi", "kupe kabrio"]} setCarValue={setCarValue}/>*/}
+                    {/*<Option name={"engine"} field={"engine"} values={["diesel", "benzyna", "jebane V8"]} setCarValue={setCarValue}/>*/}
+                    {/*<Option name={"equipment"} field={"equipment"} values={["bieda", "ujdzie", "lukus", "somsiad placze jak widzi"]}*/}
+                    {/*        setCarValue={setCarValue}/>*/}
+                    {/*<Option name={"rims"} field={"wheels.rims"} values={["18", "19", "32 z ursusa"]} setCarValue={setCarValue}/>*/}
+                    {/*<Option name={"color"} field={"body.color"} values={["czerwony", "szary", "inny szary","biały"]} setCarValue={setCarValue}/>*/}
                     </> : null}
             </>}
         </div>
