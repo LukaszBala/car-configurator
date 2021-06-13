@@ -23,7 +23,8 @@ const Configurator = () => {
             wheels: {
                 tyres: '',
                 rims: ''
-            }
+            },
+            prize: 0
         })
 
     function getDB() {
@@ -111,19 +112,28 @@ const Configurator = () => {
     }
 
     function mapOptions() {
-        const fields = Object.keys(config[car.model]);
-        return fields.map(item => {
-            // let temp = config;
-            // let keys = item;
-            // let curKey = item;
-            // let res;
-            // while (!temp[curKey][0]) {
-            //     Object.keys(temp[curKey]).map()
-            //
-            // }
-            // return res;
-            return <Option name={"type"} field={"body.type"} values={["sedan", "tfu kombi", "kupe kabrio"]} setCarValue={setCarValue} key={item}/>
-        })
+        let temp = _.cloneDeep(car);
+        let tempConfig = _.cloneDeep(config[car.model]);
+        const keys = Object.keys(temp);
+        return keys.map(key => {
+            let allKeys = key;
+            if (!tempConfig[key]) {
+                return null;
+            }
+            const anotherKeys = Object.keys(temp[key]);
+            if (anotherKeys && anotherKeys.length) {
+                return anotherKeys.map(item => {
+                    allKeys.concat(`.${item}`);
+                    if (!tempConfig[key][item]) {
+                        return null;
+                    }
+                    const values = Object.keys(tempConfig[key][item]).map(item2 => JSON.stringify(tempConfig[key][item][item2]));
+                    return <Option name={item} field={allKeys} values={values} setCarValue={setCarValue} key={item}/>;
+                })
+            }
+            const values = Object.keys(tempConfig[key]).map(item => JSON.stringify(tempConfig[key][item]));
+            return <Option name={key} field={allKeys} values={values} setCarValue={setCarValue} key={key}/>;
+        });
     }
 
     useEffect(() => {
