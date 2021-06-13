@@ -9,13 +9,14 @@
 .content {
   width: 100%;
   height: 200px;
-  border: solid 1px rgba(51, 51, 51, 0.5);
+  border: solid 1px #dddddd;
   border-radius: 5px;
   box-shadow: 0 0 10px 0 rgba(51, 51, 51, .1);
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: row;
+  background-color: white;
   .check-box-group {
     justify-content: center;
     align-items: center;
