@@ -48,6 +48,9 @@ const Configurator = () => {
 
     function setCarValue(field, value) {
         const result = setFieldInObject(field, value, car);
+        console.log(field)
+        console.log(value)
+        console.log(car)
         setCar({...result});
     }
 
@@ -116,23 +119,22 @@ const Configurator = () => {
         let tempConfig = _.cloneDeep(config[car.model]);
         const keys = Object.keys(temp);
         return keys.map(key => {
-            let allKeys = key;
             if (!tempConfig[key]) {
                 return null;
             }
             const anotherKeys = Object.keys(temp[key]);
             if (anotherKeys && anotherKeys.length) {
                 return anotherKeys.map(item => {
-                    allKeys.concat(`.${item}`);
                     if (!tempConfig[key][item]) {
                         return null;
                     }
                     const values = Object.keys(tempConfig[key][item]).map(item2 => JSON.stringify(tempConfig[key][item][item2]));
-                    return <Option name={item} field={allKeys} values={values} setCarValue={setCarValue} key={item}/>;
+
+                    return <Option name={item} field={key.concat(`.${item}`)} values={values} setCarValue={setCarValue} key={item}/>;
                 })
             }
             const values = Object.keys(tempConfig[key]).map(item => JSON.stringify(tempConfig[key][item]));
-            return <Option name={key} field={allKeys} values={values} setCarValue={setCarValue} key={key}/>;
+            return <Option name={key} field={key} values={values} setCarValue={setCarValue} key={key}/>;
         });
     }
 
