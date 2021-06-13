@@ -28,7 +28,7 @@ const Configurator = () => {
             setCar({id: '',
                 model: value,
                 body: config[value].body[0].var,
-                color: '',
+                color: config[value].color[0].var,
                 engine: config[value].engine[0].var,
                 equipment: config[value].equipment[0].var,
                 tyres: config[value].tyres[0].var,
@@ -78,11 +78,26 @@ const Configurator = () => {
         // updateConfigWithSameValues();
     }, [])
 
+    const [postId, setPostId] = useState(null);
+
+    function postDB(){
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ ...car })
+        };
+        fetch('https://car-configurator-6b257-default-rtdb.europe-west1.firebasedatabase.app/cars.json', requestOptions)
+            .then(response => response.json())
+            .then(data => setPostId(data.id));
+
+    }
+
     return (
         <div className="Main">
             {loading || !config ? <CircularProgress className='centered-loader' /> : <>
                 <ModelOption options={Object.keys(config)} field={'model'} setCarValue={setCarValue}/>
                 {car.model ? <>
+                    <button type={"button"} onClick={postDB}>dodaj do porównania</button>
                     {mapOptions()}
                     </> : null}
             </>}
