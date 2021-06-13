@@ -1,17 +1,14 @@
 import React from 'react';
 import './Option.scss';
 import CheckBoxGroup from "../CheckBox/CheckBoxGroup";
+import OptionDescription from "../OptionDescription/OptionDescription";
 
-const Option = ({name, field, values, setCarValue, current}) => (
+const Option = ({name, field, items, setCarValue, current, picture}) => (
     <div className="Option">
         <h1> {name} </h1>
         <div className="content">
-            <CheckBoxGroup name={field} values={values} setCarValue={setCarValue} current={current}/>
-            <div className="svg">
-                <svg width="100" height="100">
-                    <circle cx="50" cy="50" r="40" stroke="green" strokeWidth="4" fill="yellow" />
-                </svg>
-            </div>
+            <CheckBoxGroup name={field} values={items.map(item => item.var)} setCarValue={setCarValue} current={current}/>
+            <OptionDescription items={items} picture={picture} current={current}/>
         </div>
     </div>
 );

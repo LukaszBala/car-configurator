@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import Option from './Option/Option';
 import CircularProgress from "@material-ui/core/CircularProgress";
 import _ from 'lodash';
-import {getConfig} from "../services/Api";
+import {getConfig, updateConfigWithSameValues} from "../services/Api";
 import {setFieldInObject} from "../services/Utils";
 import ModelOption from "./ModelOption/ModelOption";
 
@@ -61,13 +61,21 @@ const Configurator = () => {
             if (!tempConfig[key]) {
                 return null;
             }
-            const values = Object.keys(tempConfig[key]).map(item => tempConfig[key][item].var.toString());
-            return values.length ? <Option name={key} field={key} values={values} setCarValue={setCarValue} key={key} current={car[key]}/> : null;
+            const items = Object.keys(tempConfig[key]).map(item => {
+                const conf = tempConfig[key][item];
+                return {
+                    var: conf.var.toString(),
+                    description: conf.describe,
+                    prize: conf.prize
+                }
+            });
+            return items.length ? <Option name={key} field={key} items={items} setCarValue={setCarValue} key={key} current={car[key]}/> : null;
         });
     }
 
     useEffect(() => {
         loadConfig();
+        // updateConfigWithSameValues();
     }, [])
 
     return (
