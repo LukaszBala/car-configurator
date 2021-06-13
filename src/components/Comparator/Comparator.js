@@ -8,15 +8,32 @@ const Comparator = () => {
         // GET request using fetch inside useEffect React hook
         fetch("https://car-configurator-6b257-default-rtdb.europe-west1.firebasedatabase.app/cars.json")
             .then(response => response.json())
-            .then(data => setCars(data))
-            .then(() => {
-                console.log('get all');
-                console.log(Object.keys(cars));
-                let t = Object.keys(cars);
-                console.log(cars[t[0]]);
-                console.log(cars["1"]);
+            .then(data => {
+                setCars(data);
+                //console.log('get all');
+                //console.log(Object.keys(data));
+                let t = Object.keys(data);
+                let t2=Object.keys(data[t[0]]);
+                //console.log(data[t[0]]);
+                //console.log(data["1"]);
                 let tempTab = [];
-                t.forEach(elem => tempTab.push(cars[elem]));
+                let t3=[];
+                t3.push('');
+                t.forEach(elem=>t3.push(elem));
+                tempTab.push(t3);
+                //console.log(t);
+                //console.log(t2);
+                for(let i=0;i<t2.length;i++){
+                    t3=[];
+                    t3.push(t2[i])
+                    for(let j=0;j<t.length;j++){
+                        t3.push(data[t[j]][t2[i]]);
+                        //console.log(data[t[j]][t2[i]]);
+                    }
+                    //console.log(t3);
+                    tempTab.push(t3)
+                }
+                //t.forEach(elem => tempTab.push(data[elem]));
                 setTab(tempTab)
             });
 
@@ -29,16 +46,17 @@ const Comparator = () => {
                 <pre>{JSON.stringify(cars, null, 2)}</pre>
             </code>
             <table>
-                <thead>
-                <tr>
-                    <th>{""}</th>
-                    {
-                        tab.map((elem, index) => {
-                            return (<th key={index}>{JSON.stringify(elem, null, 2)}</th>)
-                        })
-                    }
-                </tr>
-                </thead>
+                <tbody>
+                {
+                    tab.map((elem, index) => {
+                        return (<tr key={index}>{
+                            elem.map((elem2, index2) => {
+
+                                return (<th key={index2}>{elem2}</th>)
+                            })}</tr>)
+                    })
+                }
+                </tbody>
             </table>
         </div>
     )
