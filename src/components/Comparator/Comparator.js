@@ -1,18 +1,11 @@
 import {useEffect, useState} from "react";
 import {deleteCar} from "../../services/Api";
 
-function useForceUpdate(){
-    const [value, setValue] = useState(0); // integer state
-    console.log("dupa");
-    return () => setValue(value => value + 1); // update the state to force render
-}
-
 const Comparator = () => {
     const [cars, setCars] = useState({});
     const [tab, setTab] = useState([]);
     const [models, setModels] = useState([]);
     const [keys, setKeys] = useState([]);
-    const forceUpdate = useForceUpdate();
 
     useEffect(() => {
         update();
@@ -81,7 +74,7 @@ const Comparator = () => {
                     <th>{""}</th>
                     {
                         keys.map((elem, index) => {
-                            return (<th key={index}>{<button onClick={()=>{deleteCar(elem);update();forceUpdate();}}>delete</button>}</th>)
+                            return (<th key={index}>{<button onClick={()=>{deleteCar(elem);setKeys([]);setModels([]);setTab([]);update();}}>delete</button>}</th>)
                         })
                     }
                 </tr>
