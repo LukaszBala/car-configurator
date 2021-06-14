@@ -3,6 +3,9 @@ import {useEffect, useState} from "react";
 const Comparator = () => {
     const [cars, setCars] = useState({});
     const [tab, setTab] = useState([]);
+    const [models, setModels] = useState([]);
+    const [keys, setKeys] = useState([]);
+
 
     useEffect(() => {
         // GET request using fetch inside useEffect React hook
@@ -14,13 +17,22 @@ const Comparator = () => {
                 //console.log(Object.keys(data));
                 let t = Object.keys(data);
                 let t2=Object.keys(data[t[0]]);
+                let index = t2.indexOf("id");
+                if (index !== -1) {
+                    t2.splice(index, 1);
+                }
+                setKeys(t);
                 //console.log(data[t[0]]);
                 //console.log(data["1"]);
                 let tempTab = [];
                 let t3=[];
                 t3.push('');
-                t.forEach(elem=>t3.push(elem));
-                tempTab.push(t3);
+                t.forEach(elem=>t3.push(data[elem]["model"]));
+                setModels(t3);
+                index = t2.indexOf("model");
+                if (index !== -1) {
+                    t2.splice(index, 1);
+                }
                 //console.log(t);
                 //console.log(t2);
                 for(let i=0;i<t2.length;i++){
@@ -46,6 +58,15 @@ const Comparator = () => {
                 <pre>{JSON.stringify(cars, null, 2)}</pre>
             </code>
             <table>
+                <thead>
+                <tr>
+                {
+                    models.map((elem, index) => {
+                        return (<th key={index}>{elem}</th>)
+                    })
+                }
+                </tr>
+                </thead>
                 <tbody>
                 {
                     tab.map((elem, index) => {
