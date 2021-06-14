@@ -1,3 +1,5 @@
+
+
 export function getAllCars() {
     return fetch("https://car-configurator-6b257-default-rtdb.europe-west1.firebasedatabase.app/cars.json")
 }
@@ -37,7 +39,9 @@ export function postCar(car){
 }
 
 export function deleteCar(id){
+    // DELETE request using fetch inside useEffect React hook
     console.log("usuwam");
-    fetch(`https://car-configurator-6b257-default-rtdb.europe-west1.firebasedatabase.app/cars/${id}.json`, { method: 'DELETE' })
-        .then(response => response.json());
+    console.log(id);
+    fetch(`https://car-configurator-6b257-default-rtdb.europe-west1.firebasedatabase.app/cars/${id}.json`, {method: 'DELETE'})
+        .then(response => response.json())
 }

@@ -7,8 +7,11 @@ const Comparator = () => {
     const [models, setModels] = useState([]);
     const [keys, setKeys] = useState([]);
 
-
     useEffect(() => {
+        getAndRender();
+    }, []);
+
+    function getAndRender(){
         // GET request using fetch inside useEffect React hook
         fetch("https://car-configurator-6b257-default-rtdb.europe-west1.firebasedatabase.app/cars.json")
             .then(response => response.json())
@@ -51,7 +54,7 @@ const Comparator = () => {
             });
 
         // empty dependency array means this effect will only run once (like componentDidMount in classes)
-    }, []);
+    }
 
     return (
         <div className="Main">
@@ -71,7 +74,7 @@ const Comparator = () => {
                     <th>{""}</th>
                     {
                         keys.map((elem, index) => {
-                            return (<th key={index}>{<button onClick={deleteCar(elem)}>delete</button>}</th>)
+                            return (<th key={index}>{<button onClick={()=>{deleteCar(elem);getAndRender()}}>delete</button>}</th>)
                         })
                     }
                 </tr>
