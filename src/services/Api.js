@@ -35,3 +35,7 @@ export function postCar(car){
     return fetch('https://car-configurator-6b257-default-rtdb.europe-west1.firebasedatabase.app/cars.json', requestOptions)
         .then(response => response.json())
 }
+
+export function deleteCar(id){
+
+}

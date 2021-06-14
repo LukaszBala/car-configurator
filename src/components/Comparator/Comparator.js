@@ -1,4 +1,5 @@
 import {useEffect, useState} from "react";
+import {deleteCar} from "../../services/Api";
 
 const Comparator = () => {
     const [cars, setCars] = useState({});
@@ -58,7 +59,7 @@ const Comparator = () => {
                 <pre>{JSON.stringify(cars, null, 2)}</pre>
             </code>
             <table>
-                <thead>
+                <tbody>
                 <tr>
                 {
                     models.map((elem, index) => {
@@ -66,8 +67,14 @@ const Comparator = () => {
                     })
                 }
                 </tr>
-                </thead>
-                <tbody>
+                <tr>
+                    <th>{""}</th>
+                    {
+                        keys.map((elem, index) => {
+                            return (<th key={index}>{<button onClick={deleteCar(elem)}>delete</button>}</th>)
+                        })
+                    }
+                </tr>
                 {
                     tab.map((elem, index) => {
                         return (<tr key={index}>{
