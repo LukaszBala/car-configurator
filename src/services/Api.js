@@ -37,5 +37,7 @@ export function postCar(car){
 }
 
 export function deleteCar(id){
-
+    console.log("usuwam");
+    fetch(`https://car-configurator-6b257-default-rtdb.europe-west1.firebasedatabase.app/cars/${id}.json`, { method: 'DELETE' })
+        .then(response => response.json());
 }
