@@ -48,6 +48,21 @@ const Configurator = () => {
         }
     }
 
+    function resetModel() {
+        setCar({
+            id: '',
+            model: '',
+            body: '',
+            color: '',
+            engine: '',
+            equipment: '',
+            tyres: '',
+            rims: '',
+            url: '',
+            basePrize: '',
+            prize: 0})
+    }
+
     function getPrize(values) {
         let prize = values.basePrize;
         let fraction = config[values.model]?.body?.find(item => item.var === values.body)?.prize;
@@ -124,7 +139,7 @@ const Configurator = () => {
     return (
         <div className="Main">
             {loading || !config ? <CircularProgress className='centered-loader' /> : <>
-                <ModelOption options={Object.keys(config).map(item => ({model: item, url: config[item].url}))} field={'model'} setCarValue={setCarValue} current={car}/>
+                <ModelOption options={Object.keys(config).map(item => ({model: item, url: config[item].url}))} field={'model'} setCarValue={setCarValue} current={car} resetModel={resetModel}/>
                 {car.model ? <>
                     <div className={'overflow-content'}>
                     {mapOptions()}
