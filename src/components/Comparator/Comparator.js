@@ -7,6 +7,7 @@ const Comparator = () => {
     const [tab, setTab] = useState([]);
     const [models, setModels] = useState([]);
     const [keys, setKeys] = useState([]);
+    const [links, setLinks] = useState([]);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
@@ -20,6 +21,7 @@ const Comparator = () => {
             setKeys([]);
             setModels([]);
             setTab([]);
+            setLinks([]);
             update();
         })
     }
@@ -48,6 +50,14 @@ const Comparator = () => {
                     t.forEach(elem => t3.push(data[elem]["model"]));
                     setModels(t3);
                     index = t2.indexOf("model");
+                    if (index !== -1) {
+                        t2.splice(index, 1);
+                    }
+                    t3 = [];
+                    t3.push('');
+                    t.forEach(elem => t3.push(data[elem]["url"]));
+                    setLinks(t3);
+                    index = t2.indexOf("url");
                     if (index !== -1) {
                         t2.splice(index, 1);
                     }
@@ -90,6 +100,12 @@ const Comparator = () => {
                                         })
                                     }
                                 </tr>
+                                <tr>
+                                    {
+                                        links.map((elem, index) => {
+                                            return (<th key={index}><img style={{width: "150px"}} src={elem}/></th>)
+                                        })}
+                                < /tr>
                                 <tr>
                                     <th>{""}</th>
                                     {
