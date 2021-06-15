@@ -1,19 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import './OptionDescription.scss';
 import ReactHtmlParser from 'react-html-parser';
+import {boldDescItem} from "../../services/Utils";
 
 const OptionDescription = ({items, current}) => {
 
     // const [currentValue, setCurrentValue] = useState('');
     const [currentItem, setCurrentItem] = useState({});
-
-    function boldDescItem(item) {
-        item = item.split(':');
-        if (item.length < 2) {
-            return item[0];
-        }
-        return item[0].concat(`: <b>${item[1]}</b>`);
-    }
 
     useEffect(() => {
         // setCurrentValue(current);
