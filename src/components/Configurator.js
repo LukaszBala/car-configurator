@@ -95,10 +95,12 @@ const Configurator = () => {
     return (
         <div className="Main">
             {loading || !config ? <CircularProgress className='centered-loader' /> : <>
-                <ModelOption options={Object.keys(config)} field={'model'} setCarValue={setCarValue}/>
+                <ModelOption options={Object.keys(config)} field={'model'} setCarValue={setCarValue} current={car.model}/>
                 {car.model ? <>
+                    <div className={'overflow-content'}>
                     {mapOptions()}
-                    <Button type={"button"} onClick={() => postDB()}>dodaj do porównania</Button>
+                    </div>
+                    <Button className={'add-button'} type={"button"} onClick={() => postDB()}>dodaj do porównania</Button>
                     </> : null}
             </>}
         </div>
