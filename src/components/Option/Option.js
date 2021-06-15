@@ -10,7 +10,7 @@ const Option = ({name, field, items, setCarValue, current, picture}) => (
                 <h1> {name} </h1>
                 <OptionButtons name={field} values={items.map(item => item.var)} setCarValue={setCarValue} current={current}/>
             </div>
-            <OptionDescription items={items} picture={picture} current={current}/>
+            <OptionDescription items={items} picture={picture} current={current} type={field}/>
         </div>
     </div>
 );

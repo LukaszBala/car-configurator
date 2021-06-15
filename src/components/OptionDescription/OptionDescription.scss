@@ -8,8 +8,8 @@
 
   h2 {
     margin-top: 5px;
-    margin-bottom: 5px;
-    margin-left: 10px;
+    margin-bottom: 0;
+    //margin-left: 10px;
   }
 }
 
@@ -18,7 +18,7 @@
   height: 100%;
   align-items: flex-start;
   flex-direction: column;
-  margin-left : 10px;
+  //margin-left : 10px;
 }
 
 .svg {
@@ -28,4 +28,40 @@
 
 .icon-svg {
   filter: blur(3px);
+}
+
+.color {
+  width: 50px;
+  height: 50px;
+  border: solid 1px #dddddd;
+  border-radius: 5px;
+  box-shadow: 0 0 10px 0 rgba(51, 51, 51, .1);
+  margin: 5px;
+}
+
+.car-pic {
+  border: solid 1px #dddddd;
+  border-radius: 5px;
+  box-shadow: 0 0 10px 0 rgba(51, 51, 51, .1);
+  margin: 5px;
+}
+
+.car-pic-container, .rims-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 90px;
+}
+
+.rims-container {
+  border: solid 1px #dddddd;
+  border-radius: 5px;
+  box-shadow: 0 0 10px 0 rgba(51, 51, 51, .1);
+  margin: 5px;
+  width: 80px;
+  height: 80px;
+}
+
+.rims {
+  width: auto;
 }
