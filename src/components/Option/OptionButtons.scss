@@ -1,0 +1,24 @@
+.option-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 100%;
+  width: 100%;
+}
+
+.button-active {
+  background-color: grey!important;
+  color: #dddddd;
+
+  &:hover {
+    background-color: grey!important;
+  }
+}
+
+.option-button {
+  width: 200px;
+  border: solid 1px #dddddd!important;
+  border-radius: 2px!important;
+  box-shadow: 0 0 10px 0 rgba(51, 51, 51, .1);
+}

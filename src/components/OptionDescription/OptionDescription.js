@@ -22,14 +22,14 @@ const OptionDescription = ({items, picture, current}) => {
     }, [current])
 
     return(
-        <>{!picture ? (
+        <>{!picture ? currentItem ? (
             <div className="OptionDescription">
-                <h2>{currentItem.var}</h2>
+                <h2>{currentItem?.var}</h2>
                 <div className={'description-content'}>
                     {currentItem.description ? currentItem.description.split(',').map(item => <span key={item}>{ReactHtmlParser(boldDescItem(item))}</span>) : null}
                     <span>Prize: <b>{currentItem.prize}</b></span>
                 </div>
-            </div>) :
+            </div>) : null :
             (<div className="svg">
                 <svg width="100" height="100">
                     <circle cx="50" cy="50" r="40" stroke="green" strokeWidth="4" fill="yellow" />

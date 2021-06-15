@@ -5,10 +5,12 @@ import _ from 'lodash';
 import {getConfig, updateConfigWithSameValues} from "../services/Api";
 import {setFieldInObject} from "../services/Utils";
 import ModelOption from "./ModelOption/ModelOption";
+import {Button} from "@material-ui/core";
 
 const Configurator = () => {
 
     const [loading, setLoading] = useState(false);
+    const [postId, setPostId] = useState(null);
     const [config, setConfig] = useState(null);
     const [car, setCar] = useState(
         {
@@ -78,8 +80,6 @@ const Configurator = () => {
         // updateConfigWithSameValues();
     }, [])
 
-    const [postId, setPostId] = useState(null);
-
     function postDB(){
         const requestOptions = {
             method: 'POST',
@@ -97,8 +97,8 @@ const Configurator = () => {
             {loading || !config ? <CircularProgress className='centered-loader' /> : <>
                 <ModelOption options={Object.keys(config)} field={'model'} setCarValue={setCarValue}/>
                 {car.model ? <>
-                    <button type={"button"} onClick={postDB}>dodaj do porównania</button>
                     {mapOptions()}
+                    <Button type={"button"} onClick={() => postDB()}>dodaj do porównania</Button>
                     </> : null}
             </>}
         </div>
