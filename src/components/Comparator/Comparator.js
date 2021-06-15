@@ -2,23 +2,27 @@ import {useEffect, useState} from "react";
 import {deleteCar} from "../../services/Api";
 import {CircularProgress} from "@material-ui/core";
 
-function useForceUpdate(){
-    const [value, setValue] = useState(0); // integer state
-    return () => setValue(value => value + 1); // update the state to force render
-}
-
 const Comparator = () => {
     //const [cars, setCars] = useState({});
     const [tab, setTab] = useState([]);
     const [models, setModels] = useState([]);
     const [keys, setKeys] = useState([]);
     const [loading, setLoading] = useState(false);
-    const forceUpdate = useForceUpdate();
 
     useEffect(() => {
         setLoading(true);
         update();
     }, []);
+
+    function onDelete(id) {
+        deleteCar(id).then(() => {
+            setLoading(true);
+            setKeys([]);
+            setModels([]);
+            setTab([]);
+            update();
+        })
+    }
 
     function update() {
         // GET request using fetch inside useEffect React hook
@@ -74,7 +78,7 @@ const Comparator = () => {
                 <pre>{JSON.stringify(cars, null, 2)}</pre>
             </code>*/}
             {loading ? <CircularProgress className='centered-loader'/> :
-                (tab.length==0 ? <h1>you must add cars to compare</h1> :
+                (tab.length == 0 ? <h1>you must add cars to compare</h1> :
                         <table>
                             <tbody>
                             <tr>
@@ -88,15 +92,8 @@ const Comparator = () => {
                                 <th>{""}</th>
                                 {
                                     keys.map((elem, index) => {
-                                        return (<th key={index}>{<button onClick={() => {
-                                            deleteCar(elem);
-                                            setLoading(true);
-                                            setKeys([]);
-                                            setModels([]);
-                                            setTab([]);
-                                            update();
-                                            forceUpdate();
-                                        }}>delete</button>}</th>)
+                                        return (<th key={index}>{<button
+                                            onClick={() => onDelete(elem)}>delete</button>}</th>)
                                     })
                                 }
                             </tr>
