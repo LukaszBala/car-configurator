@@ -7,6 +7,7 @@ const Comparator = () => {
     const [tab, setTab] = useState([]);
     const [models, setModels] = useState([]);
     const [keys, setKeys] = useState([]);
+    const [links, setLinks] = useState([]);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
@@ -20,6 +21,7 @@ const Comparator = () => {
             setKeys([]);
             setModels([]);
             setTab([]);
+            setLinks([]);
             update();
         })
     }
@@ -51,6 +53,14 @@ const Comparator = () => {
                     if (index !== -1) {
                         t2.splice(index, 1);
                     }
+                    t3 = [];
+                    t3.push('');
+                    t.forEach(elem => t3.push(data[elem]["url"]));
+                    setLinks(t3);
+                    index = t2.indexOf("url");
+                    if (index !== -1) {
+                        t2.splice(index, 1);
+                    }
                     //console.log(t);
                     //console.log(t2);
                     for (let i = 0; i < t2.length; i++) {
@@ -78,36 +88,45 @@ const Comparator = () => {
                 <pre>{JSON.stringify(cars, null, 2)}</pre>
             </code>*/}
             {loading ? <CircularProgress className='centered-loader'/> :
-                (tab.length == 0 ? <h1>you must add cars to compare</h1> :
-                        <table>
-                            <tbody>
-                            <tr>
+                (tab.length == 0 ? <h1>You must add cars to compare</h1> :
+                        <div>
+                            <h1>Compare your configurations </h1>
+                            <table>
+                                <tbody>
+                                <tr>
+                                    {
+                                        models.map((elem, index) => {
+                                            return (<th key={index}>{elem}</th>)
+                                        })
+                                    }
+                                </tr>
+                                <tr>
+                                    {
+                                        links.map((elem, index) => {
+                                            return (<th key={index}><img style={{width: "150px"}} src={elem}/></th>)
+                                        })}
+                                < /tr>
+                                <tr>
+                                    <th>{""}</th>
+                                    {
+                                        keys.map((elem, index) => {
+                                            return (<th key={index}>{<button
+                                                onClick={() => onDelete(elem)}>delete</button>}</th>)
+                                        })
+                                    }
+                                </tr>
                                 {
-                                    models.map((elem, index) => {
-                                        return (<th key={index}>{elem}</th>)
-                                    })
-                                }
-                            </tr>
-                            <tr>
-                                <th>{""}</th>
-                                {
-                                    keys.map((elem, index) => {
-                                        return (<th key={index}>{<button
-                                            onClick={() => onDelete(elem)}>delete</button>}</th>)
-                                    })
-                                }
-                            </tr>
-                            {
-                                tab.map((elem, index) => {
-                                    return (<tr key={index}>{
-                                        elem.map((elem2, index2) => {
+                                    tab.map((elem, index) => {
+                                        return (<tr key={index}>{
+                                            elem.map((elem2, index2) => {
 
-                                            return (<th key={index2}>{elem2}</th>)
-                                        })}</tr>)
-                                })
-                            }
-                            </tbody>
-                        </table>
+                                                return (<th key={index2}>{elem2}</th>)
+                                            })}</tr>)
+                                    })
+                                }
+                                </tbody>
+                            </table>
+                        </div>
                 )
             }
         </div>
