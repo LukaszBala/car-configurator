@@ -1,12 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import './ModelOption.scss';
 import {Button} from "@material-ui/core";
 
-const ModelOption = ({options, setCarValue, field, current, resetModel}) => {
+const ModelOption = ({options, setCarValue, field, current, resetModel, setCar}) => {
 
     const[body, setBody] = useState(null);
     const[rims, setRims] = useState(null);
     const[color, setColor] = useState(null);
+    let upload = useRef(null)
 
     useEffect(() => {
         setBody(getBody());
@@ -39,16 +40,44 @@ const ModelOption = ({options, setCarValue, field, current, resetModel}) => {
         return logo;
     }
 
+    function onChangeFile(event) {
+        event.stopPropagation();
+        event.preventDefault();
+        const file = event.target.files[0];
+        console.log(file);
+        const reader = new FileReader()
+        reader.onload = async (e) => {
+            const text = (e.target.result)
+            let res;
+            try {
+                res = JSON.parse(text.toString());
+            } catch (e) {
+                alert('File is not valid!')
+                return;
+            }
+            setCar(res);
+        };
+        reader.readAsText(event.target.files[0])
+        // this.setState({file}); /// if you want to upload latter
+    }
+
 
     return(
       <div className="ModelOption">
+          <input id="myInput"
+                 type="file"
+                 ref={(ref) => upload = ref}
+                 style={{display: 'none'}}
+                 onChange={(event) =>onChangeFile(event)}
+          />
           { !current.model ? (<>
               <h1> Choose your starting model </h1>
               <div className="content model-content">
           {options.map(item => <div className={'car'} key={item.model} onClick={() => setCarValue(field, item.model)}>
               <img className={'model-img'} src={item.url}/>
               {item.model}
-          </div>)}
+          </div> )}
+          <Button onClick={()=>upload.click()}>Load From Disk</Button>
           </div>
           </>) : (
               <>

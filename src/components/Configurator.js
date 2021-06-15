@@ -63,6 +63,14 @@ const Configurator = () => {
             prize: 0})
     }
 
+    function download(content, fileName, contentType) {
+        const a = document.createElement("a");
+        const file = new Blob([content], {type: contentType});
+        a.href = URL.createObjectURL(file);
+        a.download = fileName;
+        a.click();
+    }
+
     function getPrize(values) {
         let prize = values.basePrize;
         let fraction = config[values.model]?.body?.find(item => item.var === values.body)?.prize;
@@ -139,12 +147,15 @@ const Configurator = () => {
     return (
         <div className="Main">
             {loading || !config ? <CircularProgress className='centered-loader' /> : <>
-                <ModelOption options={Object.keys(config).map(item => ({model: item, url: config[item].url}))} field={'model'} setCarValue={setCarValue} current={car} resetModel={resetModel}/>
+                <ModelOption options={Object.keys(config).map(item => ({model: item, url: config[item].url}))} field={'model'} setCar={setCar} setCarValue={setCarValue} current={car} resetModel={resetModel}/>
                 {car.model ? <>
                     <div className={'overflow-content'}>
                     {mapOptions()}
                     </div>
-                    <Button className={'add-button'} type={"button"} onClick={() => postDB()}>dodaj do porównania</Button>
+                    <div className={'myButtons'}>
+                        <Button className={'add-button'} type={"button"} onClick={() => download(JSON.stringify(car), `myCar-${car.model}-${new Date().toDateString()}.json`, 'text/plain')}>Download</Button>
+                        <Button className={'add-button'} type={"button"} onClick={() => postDB()}>Add to compare</Button>
+                    </div>
                     </> : null}
             </>}
         </div>

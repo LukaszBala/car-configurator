@@ -40,6 +40,15 @@
   border-radius: 0!important;
 }
 
+.myButtons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 80%;
+  max-width: 800px;
+}
+
 /* width */
 ::-webkit-scrollbar {
   width: 10px;

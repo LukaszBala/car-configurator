@@ -1,0 +1,34 @@
+.table-container {
+  border: solid 1px #dddddd;
+  border-radius: 5px;
+  box-shadow: 0 0 10px 0 rgba(51, 51, 51, .1);
+  padding: 20px;
+}
+
+button {
+  border: solid 1px #dddddd!important;
+  border-radius: 5px!important;
+  box-shadow: 0 0 10px 0 rgba(51, 51, 51, .1)!important;
+}
+
+.table-img {
+  width: auto;
+  height: 130px;
+  padding: 10px;
+  border: solid 1px #dddddd;
+  border-radius: 5px;
+  box-shadow: 0 0 10px 0 rgba(51, 51, 51, .1);
+}
+
+.titles {
+  font-weight: bold;
+  border: solid 1px #dddddd;
+  box-shadow: 0 0 10px 0 rgba(51, 51, 51, .1);
+  padding: 5px;
+}
+
+.values {
+  font-weight: normal;
+  border: solid 1px #dddddd;
+  box-shadow: 0 0 10px 0 rgba(51, 51, 51, .1);
+}

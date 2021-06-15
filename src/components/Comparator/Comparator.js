@@ -1,6 +1,8 @@
 import {useEffect, useState} from "react";
 import {deleteCar} from "../../services/Api";
 import {CircularProgress} from "@material-ui/core";
+import './Comparator.scss'
+import { Button} from "@material-ui/core";
 
 const Comparator = () => {
     //const [cars, setCars] = useState({});
@@ -91,7 +93,7 @@ const Comparator = () => {
                 (tab.length == 0 ? <h1>You must add cars to compare</h1> :
                         <div>
                             <h1>Compare your configurations </h1>
-                            <table>
+                            <table className={'table-container'}>
                                 <tbody>
                                 <tr>
                                     {
@@ -103,24 +105,24 @@ const Comparator = () => {
                                 <tr>
                                     {
                                         links.map((elem, index) => {
-                                            return (<th key={index}><img style={{width: "150px"}} src={elem}/></th>)
+                                            return (<th key={index}> {elem && <img className={'table-img'} src={elem}/>}</th>)
                                         })}
-                                < /tr>
+                                </tr>
                                 <tr>
                                     <th>{""}</th>
                                     {
                                         keys.map((elem, index) => {
-                                            return (<th key={index}>{<button
-                                                onClick={() => onDelete(elem)}>delete</button>}</th>)
+                                            return (<th key={index}>{<Button
+                                                onClick={() => onDelete(elem)}>delete</Button>}</th>)
                                         })
                                     }
                                 </tr>
                                 {
                                     tab.map((elem, index) => {
-                                        return (<tr key={index}>{
+                                        return (<tr className={'content-desc'} key={index}>{
                                             elem.map((elem2, index2) => {
 
-                                                return (<th key={index2}>{elem2}</th>)
+                                                return (<th className={index2 === 0 ? 'titles' : 'values'} key={index2}>{elem2}</th>)
                                             })}</tr>)
                                     })
                                 }
