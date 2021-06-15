@@ -78,36 +78,39 @@ const Comparator = () => {
                 <pre>{JSON.stringify(cars, null, 2)}</pre>
             </code>*/}
             {loading ? <CircularProgress className='centered-loader'/> :
-                (tab.length == 0 ? <h1>you must add cars to compare</h1> :
-                        <table>
-                            <tbody>
-                            <tr>
+                (tab.length == 0 ? <h1>You must add cars to compare</h1> :
+                        <div>
+                            <h1>Compare your configurations </h1>
+                            <table>
+                                <tbody>
+                                <tr>
+                                    {
+                                        models.map((elem, index) => {
+                                            return (<th key={index}>{elem}</th>)
+                                        })
+                                    }
+                                </tr>
+                                <tr>
+                                    <th>{""}</th>
+                                    {
+                                        keys.map((elem, index) => {
+                                            return (<th key={index}>{<button
+                                                onClick={() => onDelete(elem)}>delete</button>}</th>)
+                                        })
+                                    }
+                                </tr>
                                 {
-                                    models.map((elem, index) => {
-                                        return (<th key={index}>{elem}</th>)
-                                    })
-                                }
-                            </tr>
-                            <tr>
-                                <th>{""}</th>
-                                {
-                                    keys.map((elem, index) => {
-                                        return (<th key={index}>{<button
-                                            onClick={() => onDelete(elem)}>delete</button>}</th>)
-                                    })
-                                }
-                            </tr>
-                            {
-                                tab.map((elem, index) => {
-                                    return (<tr key={index}>{
-                                        elem.map((elem2, index2) => {
+                                    tab.map((elem, index) => {
+                                        return (<tr key={index}>{
+                                            elem.map((elem2, index2) => {
 
-                                            return (<th key={index2}>{elem2}</th>)
-                                        })}</tr>)
-                                })
-                            }
-                            </tbody>
-                        </table>
+                                                return (<th key={index2}>{elem2}</th>)
+                                            })}</tr>)
+                                    })
+                                }
+                                </tbody>
+                            </table>
+                        </div>
                 )
             }
         </div>
