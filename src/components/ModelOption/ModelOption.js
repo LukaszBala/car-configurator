@@ -18,6 +18,16 @@ const ModelOption = ({options, setCarValue, field, current}) => {
                       <img className={'model-img'} src={current.url}/>
                       {current.model}
                   </div>
+                  <div className={'description-content'}>
+                      <span>Prize: <b>{current.prize}</b></span>
+                      <span>Base prize: <b>{current.basePrize}</b></span>
+                      <span>Model: <b>{current.model}</b></span>
+                      <span>Body: <b>{current.body}</b></span>
+                      <span>Color: <b>{current.color}</b></span>
+                      <span>Equipment: <b>{current.equipment}</b></span>
+                      <span>Tyres: <b>{current.tyres}</b></span>
+                      <span>Rims: <b>{current.rims}</b></span>
+                  </div>
               </div>)}
       </div>
 )};
