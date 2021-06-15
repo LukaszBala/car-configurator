@@ -6,8 +6,8 @@ const Home = () => {
         <div className="Main">
             <header className="App-header">
                 <img src={logo} className="App-logo" alt="logo"/>
-                <a href="/" >Importuj konfigurację</a>
-                <a href="/config">Utwórz nową konfigurację</a>
+                {/*<a href="/" >Importuj konfigurację</a>
+                <a href="/config">Utwórz nową konfigurację</a>*/}
             </header>
         </div>
     );

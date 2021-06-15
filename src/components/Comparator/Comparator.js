@@ -63,6 +63,10 @@ const Comparator = () => {
                     if (index !== -1) {
                         t2.splice(index, 1);
                     }
+                    index = t2.indexOf("basePrize");
+                    if (index !== -1) {
+                        t2.splice(index, 1);
+                    }
                     //console.log(t);
                     //console.log(t2);
                     for (let i = 0; i < t2.length; i++) {
