@@ -22,6 +22,7 @@ const Configurator = () => {
             equipment: '',
             tyres: '',
             rims: '',
+            url: '',
             prize: 0
         })
 
@@ -35,7 +36,8 @@ const Configurator = () => {
                 equipment: config[value].equipment[0].var,
                 tyres: config[value].tyres[0].var,
                 rims: config[value].rims[0].var.toString(),
-                prize: config[value].prize});
+                prize: config[value].prize,
+                url: config[value].url});
         } else {
             const result = setFieldInObject(field, value, car);
             setCar({...result});
@@ -60,13 +62,13 @@ const Configurator = () => {
         let tempConfig = _.cloneDeep(config[car.model]);
         const keys = Object.keys(temp);
         return keys.map(key => {
-            if (!tempConfig[key]) {
+            if (!tempConfig[key] || key === 'url') {
                 return null;
             }
             const items = Object.keys(tempConfig[key]).map(item => {
                 const conf = tempConfig[key][item];
                 return {
-                    var: conf.var.toString(),
+                    var: conf?.var?.toString(),
                     description: conf.describe,
                     prize: conf.prize
                 }
@@ -95,7 +97,7 @@ const Configurator = () => {
     return (
         <div className="Main">
             {loading || !config ? <CircularProgress className='centered-loader' /> : <>
-                <ModelOption options={Object.keys(config)} field={'model'} setCarValue={setCarValue} current={car.model}/>
+                <ModelOption options={Object.keys(config).map(item => ({model: item, url: config[item].url}))} field={'model'} setCarValue={setCarValue} current={car}/>
                 {car.model ? <>
                     <div className={'overflow-content'}>
                     {mapOptions()}
