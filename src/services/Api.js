@@ -42,6 +42,6 @@ export function deleteCar(id){
     // DELETE request using fetch inside useEffect React hook
     console.log("usuwam");
     console.log(id);
-    fetch(`https://car-configurator-6b257-default-rtdb.europe-west1.firebasedatabase.app/cars/${id}.json`, {method: 'DELETE'})
+    return fetch(`https://car-configurator-6b257-default-rtdb.europe-west1.firebasedatabase.app/cars/${id}.json`, {method: 'DELETE'})
         .then(response => response.json())
 }
