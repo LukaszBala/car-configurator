@@ -10,7 +10,6 @@ import {Button} from "@material-ui/core";
 const Configurator = () => {
 
     const [loading, setLoading] = useState(false);
-    const [postId, setPostId] = useState(null);
     const [config, setConfig] = useState(null);
     const [car, setCar] = useState(
         {
@@ -140,7 +139,6 @@ const Configurator = () => {
         };
         fetch('https://car-configurator-6b257-default-rtdb.europe-west1.firebasedatabase.app/cars.json', requestOptions)
             .then(response => response.json())
-            .then(data => setPostId(data.id));
 
     }
 
